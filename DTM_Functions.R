@@ -48,4 +48,4 @@ DTM_Matrix <- function(lem_Token, docs.list) {
       dtm[q, p] = length(grep(lem_Token[p], docs.list[[q]]))
       #dtms[[a]] <- dtm[,]
       #write.csv(dtms[[a]], "dtm.2005.csv")
-      return(dtm]) }}}  
+      return(dtm) }}}  
