@@ -3,7 +3,8 @@
 Unigram <- function(d1){
   d2 = data_frame(d1 = d1)
   d2 = d2 %>% unnest_tokens(word, d1) %>% anti_join(stop_words)
-  return(d2) }
+  return(d2) 
+  }
 
 # 2. Creating BiGrams (n = 2)
 Bigram <- function(d1) {
