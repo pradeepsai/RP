@@ -1,0 +1,10 @@
+mat <- rbind.fill.matrix(apply(dat[-1], 1, function(i) t(as.matrix(table(i)))))
+mat <- rbind.fill.matrix(apply(dat[-1], 1, function(i) t(as.matrix(table(i)))))
+mat[is.na(mat)] <- 0
+rownames(mat) <- dat$A
+
+# plot   
+ggplot(melt(mat), aes(Var2, Var1, fill=value)) + 
+                 geom_tile() +
+                 scale_fill_gradient(limits=c(0,3), low="white") +
+                 geom_text( aes(label=value))
