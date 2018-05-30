@@ -12,8 +12,8 @@ server <- shinyServer(function(input, output) {
   english_model = udpipe_load_model("./english-ud-2.0-170801.udpipe")
   
     d1 <- reactive( {
-      #txt  <- read_file(input$file$datapath)
-      txt <- read_file("./1.txt")
+      txt  <- read_file(input$file$datapath)
+      #txt <- read_file("./1.txt")
       txt0 <- gsub("[^a-zA-Z\\s]", " ", txt) %>% str_replace_all("[\\s]+", " ") %>% tolower() 
       txt1 <- txt0 %>% data.frame(txt0, stringsAsFactors = FALSE) %>% unnest_tokens(word,txt0) %>% anti_join(stop_words)
       txt2 <- txt1$word %>%lemmatize_words()
@@ -55,8 +55,8 @@ server <- shinyServer(function(input, output) {
 #3. co occurance 
 
     d2 <- reactive({
-      txt <- read_file("./1.txt")
-      #txt  <- read_file(input$file$datapath)
+      #txt <- read_file("./1.txt")
+      txt  <- read_file(input$file$datapath)
       txt0 <- gsub("[^a-zA-Z\\s]", " ", txt) %>% str_replace_all("[\\s]+", " ") %>% tolower() 
       
       x <- udpipe_annotate(english_model, txt0) #, tagger = "default", parser = "none") ## Tokenization + finds sentences, POS tagging and lemmatization
