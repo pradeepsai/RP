@@ -1,25 +1,37 @@
+############################### Functions for Text Analytics Assignment - 2 ###########################
 
 # 1. Creating Unigrams.
 Unigram <- function(d1){
-  d2 = data_frame(d1 = d1)
-  d2 = d2 %>% unnest_tokens(word, d1) %>% anti_join(stop_words)
-  return(d2) }
+  d1_Unigram = d1 %>% mutate(Doc_Name = file)%>% unnest_tokens(word, bd.text) %>% anti_join(stop_words)%>%group_by(Doc_Name)%>%count(word, sort=TRUE)
+  return(d1_Unigram) }
 
-# 2. Creating BiGrams (n = 2)
+
+dataset <- function(d1) {
+  #output$raw = renderDataTable({ 
+  #raw <- d1()  
+  english_model = udpipe_load_model("./english-ud-2.0-170801.udpipe")
+  x <- udpipe_annotate(english_model, raw) #, tagger = "default", parser = "none") ## Tokenization + finds sentences, POS tagging and lemmatization
+  x <- as.data.frame(x) 
+  x <- subset(x, select = -c(sentence))
+  table(x$upos)
+  table(x$dep_rel)
+  head(x, 100)
+#})
+}
+
+ # 2. Creating BiGrams (n = 2)
 Bigram <- function(d1) {
-  d1_bigram = data_frame(d1 = d1)
-  d1_bigram = d1_bigram %>% unnest_tokens(bigram, d1, token = "ngrams", n = 2)
+  d1_bigram <- d1 %>% mutate(Doc_Name = file)%>% unnest_tokens(bigram, bd.text, token = "ngrams", n = 2) %>% group_by(Doc_Name) %>% count(bigram, sort=TRUE)
   bigram_split <- d1_bigram %>% separate(bigram, c("word1", "word2"), sep = " ") 
   bigram_filter_sw <- bigram_split %>% filter(!word1 %in% stop_words$word) %>% filter(!word2 %in% stop_words$word)
   bigram_count <- bigram_filter_sw %>% count(word1, word2, sort = TRUE)
   bigrams_count_freq <- head(bigram_count, 20)
   bigrams_united <- bigrams_count_freq %>% unite(bigram_freq, word1, word2, sep = " ")
-  return(bigrams_united) 
-  }
+  return(bigrams_united) }
 
 
 # 3. Creating Phrase words: Nouns, Verbs, etc...  
-  
+
 Noun <- function(x) {
   nouns = x %>% subset(., upos %in% "NOUN") 
   nouns_count = txt_freq(nouns$lemma)  
@@ -49,13 +61,13 @@ DTM_Matrix <- function(lem_Token, docs.list) {
   dtm = matrix(0, nrow = 1, ncol = length(lem_Token))
   row.names(dtm) = seq(1)
   colnames(dtm) = lem_Token
-
+  
   for (p in 1:length(lem_Token)){    # looping over tokens
     for (q in 1){    # loop over documents 
       dtm[q, p] = length(grep(lem_Token[p], docs.list[[q]]))
       #dtms[[a]] <- dtm[,]
       #write.csv(dtms[[a]], "dtm.2005.csv")
-      return(dtm])
+      return(dtm)
     }}}
-  
+
 
