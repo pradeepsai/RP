@@ -10,7 +10,7 @@ shinyUI(
     sidebarPanel(
       fileInput("file", " Upload any text file"),
       radioButtons(inputId = "Language", label = "Language Model", choices = c("English")),
-      checkboxGroupInput(inputId = "pos", label = "Select Parts of Speech", choices = c("ADJ",   "ADP",   "ADV",   "AUX", "CCONJ",  "DET",  "INTJ",  "NOUN",   "NUM",  "PART",  "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB"),selected=c("ADJ","NOUN","PROPN")),
+      checkboxGroupInput(inputId = "pos", label = "Select Parts of Speech", choices = c("ADJ", "ADV", "CCONJ", "NOUN",  "PRON", "PROPN", "SCONJ", "VERB"),selected=c("ADJ","NOUN","PROPN")),
       downloadButton("annotate_download.csv", label = "Download Annotation in a CSV file")
     ),
     
