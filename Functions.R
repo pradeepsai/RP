@@ -2,15 +2,9 @@
 
 # 1. Creating Unigrams.
 Unigram <- function(d1){
-<<<<<<< HEAD:Functions.R
   d1_Unigram = d1 %>% mutate(Doc_Name = file)%>% unnest_tokens(word, bd.text) %>% anti_join(stop_words)%>%group_by(Doc_Name)%>%count(word, sort=TRUE)
   return(d1_Unigram) }
 
-=======
-  d2 = data_frame(d1 = d1)
-  d2 = d2 %>% unnest_tokens(word, d1) %>% anti_join(stop_words)
-  return(d2) }
->>>>>>> 4a5b4c5af40efd463ed8a03c0b0dc65f23e55830:DTM_Functions.R
 # 2. Creating BiGrams (n = 2)
 Bigram <- function(d1) {
   d1_bigram <- d1 %>% mutate(Doc_Name = file)%>% unnest_tokens(bigram, bd.text, token = "ngrams", n = 2) %>% group_by(Doc_Name) %>% count(bigram, sort=TRUE)
@@ -20,12 +14,10 @@ Bigram <- function(d1) {
   bigrams_count_freq <- head(bigram_count, 20)
   bigrams_united <- bigrams_count_freq %>% unite(bigram_freq, word1, word2, sep = " ")
   return(bigrams_united) }
-<<<<<<< HEAD:Functions.R
 
 
-=======
->>>>>>> 4a5b4c5af40efd463ed8a03c0b0dc65f23e55830:DTM_Functions.R
 # 3. Creating Phrase words: Nouns, Verbs, etc...  
+  
 Noun <- function(x) {
   nouns = x %>% subset(., upos %in% "NOUN") 
   nouns_count = txt_freq(nouns$lemma)  
@@ -46,9 +38,11 @@ Adverbs <- function(x) {
 Adjectives <- function(x) {
   adjectives = x %>% subset(., upos %in% "ADJ") 
   adjectives_count = txt_freq(adjectives$lemma) 
-  return(adjectives_count) }
+  return(adjectives_count)
+}
 
 # 4. Creating DTM object
+
 DTM_Matrix <- function(lem_Token, docs.list) {
   dtm = matrix(0, nrow = 1, ncol = length(lem_Token))
   row.names(dtm) = seq(1)
@@ -59,11 +53,7 @@ DTM_Matrix <- function(lem_Token, docs.list) {
       dtm[q, p] = length(grep(lem_Token[p], docs.list[[q]]))
       #dtms[[a]] <- dtm[,]
       #write.csv(dtms[[a]], "dtm.2005.csv")
-<<<<<<< HEAD:Functions.R
       return(dtm)
     }}}
   
 
-=======
-      return(dtm)  }}}  
->>>>>>> 4a5b4c5af40efd463ed8a03c0b0dc65f23e55830:DTM_Functions.R
