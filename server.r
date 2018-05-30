@@ -1,3 +1,14 @@
+
+#################################################################################################
+#                                                                                               #
+# Title: Text Analytics Group Assignment- 2                                                     #  
+# Topic: Building a Shiny App                                                                   #
+# Team: Pradeep Sai Ramisetty:11910044, Sunil Gorantla:11910018, Nagarjuna Resu: 11910071       #
+#                                                                                               #
+#################################################################################################
+
+######################################### Server.R ##############################################
+
 if (!require(udpipe)){install.packages("udpipe")};library(udpipe)
 if (!require(lattice)){install.packages("lattice")};library(lattice)
 if (!require(wordcloud)){install.packages("wordcloud")};library(wordcloud)
