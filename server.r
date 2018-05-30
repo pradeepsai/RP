@@ -13,7 +13,6 @@ server <- shinyServer(function(input, output) {
   
     d1 <- reactive( {
       txt  <- read_file(input$file$datapath)
-      #txt <- read_file("./1.txt")
       txt0 <- gsub("[^a-zA-Z\\s]", " ", txt) %>% str_replace_all("[\\s]+", " ") %>% tolower() 
       txt1 <- txt0 %>% data.frame(txt0, stringsAsFactors = FALSE) %>% unnest_tokens(word,txt0) %>% anti_join(stop_words)
       txt2 <- txt1$word %>%lemmatize_words()
@@ -26,7 +25,8 @@ server <- shinyServer(function(input, output) {
 # 1. Annotation
     
     output$ann <- renderDataTable({ 
-      head( d1(), 100)  
+      d1()
+      #head( d1(), 100)  
     })
     
     output$annotate_download.csv <- downloadHandler(
