@@ -1,7 +1,14 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
+
+#################################################################################################
+#                                                                                               #
+# Title: Text Analytics Group Assignment- 2                                                     #  
+# Topic: Building a Shiny App                                                                   #
+# Team: Pradeep Sai Ramisetty:11910044, Sunil Gorantla:11910018, Nagarjuna Resu: 11910071       #
+#                                                                                               #
+#################################################################################################
+
+# This is a Shiny web application. You can run the application by clicking the 'Run App' button above.
+
 if (!require(udpipe)){install.packages("udpipe")};library(udpipe)
 if (!require(lattice)){install.packages("lattice")};library(lattice)
 if (!require(wordcloud)){install.packages("wordcloud")};library(wordcloud)
