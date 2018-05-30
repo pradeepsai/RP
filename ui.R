@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-#if (!require(shiny)) {install.packages("shiny")}
+if (!require(shiny)) {install.packages("shiny")}
 library(shiny)
 
 ui <- shinyUI(
