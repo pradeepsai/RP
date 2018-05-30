@@ -5,7 +5,7 @@ if (!require(tidyverse)) {install.packages("tidyverse")};library(tidyverse)
 if (!require(tidytext)) {install.packages("tidytext")};library(tidytext)
 if (!require(stringr)) {install.packages("stringr")};library(stringr)
 if (!require(readr)) {install.packages("readr")};library(readr)
-
+if (!require(textstem)) {install.packages("textstem")};library(textstem)
 
 server <- shinyServer(function(input, output) {
   ud_model_english <- udpipe_download_model(language = "english")
