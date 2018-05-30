@@ -1,30 +1,20 @@
-############################### Functions for Text Analytics Assignment -1 ###########################
-
 # 1. Creating Unigrams.
 Unigram <- function(d1){
-<<<<<<< HEAD:Functions.R
-  d1_Unigram = d1 %>% mutate(Doc_Name = file)%>% unnest_tokens(word, bd.text) %>% anti_join(stop_words)%>%group_by(Doc_Name)%>%count(word, sort=TRUE)
-  return(d1_Unigram) }
-
-=======
   d2 = data_frame(d1 = d1)
   d2 = d2 %>% unnest_tokens(word, d1) %>% anti_join(stop_words)
   return(d2) }
->>>>>>> 4a5b4c5af40efd463ed8a03c0b0dc65f23e55830:DTM_Functions.R
+  
 # 2. Creating BiGrams (n = 2)
 Bigram <- function(d1) {
-  d1_bigram <- d1 %>% mutate(Doc_Name = file)%>% unnest_tokens(bigram, bd.text, token = "ngrams", n = 2) %>% group_by(Doc_Name) %>% count(bigram, sort=TRUE)
+  d1_bigram = data_frame(d1 = d1)
+  d1_bigram = d1_bigram %>% unnest_tokens(bigram, d1, token = "ngrams", n = 2)
   bigram_split <- d1_bigram %>% separate(bigram, c("word1", "word2"), sep = " ") 
   bigram_filter_sw <- bigram_split %>% filter(!word1 %in% stop_words$word) %>% filter(!word2 %in% stop_words$word)
   bigram_count <- bigram_filter_sw %>% count(word1, word2, sort = TRUE)
   bigrams_count_freq <- head(bigram_count, 20)
   bigrams_united <- bigrams_count_freq %>% unite(bigram_freq, word1, word2, sep = " ")
   return(bigrams_united) }
-<<<<<<< HEAD:Functions.R
-
-
-=======
->>>>>>> 4a5b4c5af40efd463ed8a03c0b0dc65f23e55830:DTM_Functions.R
+  
 # 3. Creating Phrase words: Nouns, Verbs, etc...  
 Noun <- function(x) {
   nouns = x %>% subset(., upos %in% "NOUN") 
@@ -59,11 +49,4 @@ DTM_Matrix <- function(lem_Token, docs.list) {
       dtm[q, p] = length(grep(lem_Token[p], docs.list[[q]]))
       #dtms[[a]] <- dtm[,]
       #write.csv(dtms[[a]], "dtm.2005.csv")
-<<<<<<< HEAD:Functions.R
-      return(dtm)
-    }}}
-  
-
-=======
-      return(dtm)  }}}  
->>>>>>> 4a5b4c5af40efd463ed8a03c0b0dc65f23e55830:DTM_Functions.R
+      return(dtm) }}}  
